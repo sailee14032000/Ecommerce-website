@@ -1,0 +1,75 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+	
+<div class="row">
+	<div class="col-lg-6">
+		<div class="box-element" id="form-wrapper">
+			<form id="form">
+				<div id="user-info">
+					<div class="form-field">
+						<input type="text" class="form-control" name="" placeholder="Name">
+						
+					</div>
+					<div class="form-field">
+					    <input type="email" class="form-control" name="" placeholder="Email">
+					</div>	
+				</div>
+				<div id="shipping-info">
+		<hr>
+		<h5><strong>Shipping Information:</strong></h5>
+		<hr>
+		<div class="form-field">
+			<input class="form-control" type="text" name="address" placeholder="Address">
+		</div>
+		<div class="form-field">
+			<input class="form-control" type="text" name="city" placeholder="City">
+		</div>
+		<div class="form-field">
+			<input class="form-control" type="text" name="state" placeholder="State">
+		</div>
+		<div class="form-field">
+			<input class="form-control" type="text" name="zipcode" placeholder="Zip code">
+		</div>
+	</div>
+	<hr>
+				<input type="submit" class="btn btn-success btn-block" name="" value="Continue">
+			</form>
+
+		</div>
+		
+	</div>
+
+	<div class="col-lg-6">
+		<div class="box-element">
+			<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+			<hr>
+			<h5><strong>Order Summary</strong></h5>
+			<table class="table">
+		<tr>
+			<th class="col-md-4"><h5><strong>Item</strong></h5></th>
+			<th class="col-md-2"><h5><strong>Price</strong></h5></th>
+			<th class="col-md-2"><h5><strong>Quantity</strong></h5></th>
+			<th class="col-md-2"><h5><strong>Total</strong></h5></th>
+		</tr>
+		{% for item in items %}
+		<tr>
+			
+			<td class="col-md-4">{{ item.product.name }}</td>
+			<td class="col-md-2">{{ item.product.price }}</td>
+			<td class="col-md-2">{{ item.quantity }}</td>
+			<td>{{item.get_total}}</td>
+		</tr>
+		{% endfor  %}
+		<tr>
+			<td colspan="2"><b>Total</b></td>
+			<td>{{order.get_cart_items}}</td>
+			<td>{{order.get_cart_total}}</td>
+			
+		</tr>
+	</table>
+
+		</div>
+	</div>
+</div>
+{% endblock content %}
